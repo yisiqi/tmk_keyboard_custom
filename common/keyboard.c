@@ -64,6 +64,9 @@ static bool has_ghost_in_row(uint8_t row)
 }
 #endif
 
+#ifdef PS2_MOUSE_ENABLE
+extern uint8_t ps2_mouse_enabled;
+#endif
 
 void keyboard_init(void)
 {
@@ -75,7 +78,7 @@ void keyboard_init(void)
 #endif
 
 #ifdef PS2_MOUSE_ENABLE
-    if (ps2_enabled()) {
+    if (ps2_mouse_enabled) {
         ps2_mouse_init();
     }
 #endif
@@ -157,7 +160,7 @@ MATRIX_LOOP_END:
 #endif
 
 #ifdef PS2_MOUSE_ENABLE
-    if (ps2_enabled()) {
+    if (ps2_mouse_enabled) {
         ps2_mouse_task();
     }
 #endif
