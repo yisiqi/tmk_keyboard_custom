@@ -40,7 +40,7 @@ const uint16_t fn_actions[] PROGMEM = {
 #endif
 };
 
-#ifdef KEYMAP_EX_ENABLE
+#ifdef KEYMAP_IN_EEPROM_ENABLE
 uint16_t keys_count(void) {
     return sizeof(keymaps) / sizeof(keymaps[0]) * MATRIX_ROWS * MATRIX_COLS;
 }
@@ -49,3 +49,18 @@ uint16_t fn_actions_count(void) {
     return sizeof(fn_actions) / sizeof(fn_actions[0]);
 }
 #endif
+
+enum macro_id {
+    KEYPAD_00 = 0,
+};
+
+const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
+{
+    switch (id) {
+        case KEYPAD_00:
+            return (record->event.pressed ?
+                    MACRO( T(P0), T(P0), END ) :
+                    MACRO_NONE );
+    }
+    return MACRO_NONE;
+}
